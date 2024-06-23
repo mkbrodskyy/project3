@@ -15,3 +15,7 @@ This is the second project of the Software Engineering program at TripleTen. It 
 
 - Changing font and colors
 - Adding interesting transitions
+
+
+## Link to video
+https://drive.google.com/file/d/15hlPMcYcGkyoObKgnjiCCkvOd0e09XCs/view?usp=drive_link
