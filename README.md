@@ -20,6 +20,6 @@ This is the second project of the Software Engineering program at TripleTen. It 
 
 https://drive.google.com/file/d/15hlPMcYcGkyoObKgnjiCCkvOd0e09XCs/view?usp=drive_link
 
-## Link to GitHub page
+## Link to Github pages
 
-https://github.com/mkbrodskyy/project3.git
+https://mkbrodskyy.github.io/project3/
