@@ -37,9 +37,8 @@ const profileDescriptionInput = document.querySelector("#profile-description");
 const cardsListEl = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
 
-function closePopup() {
-  profileEditModal.classList.remove("modal__open");
-}
+
+const modalOpenedSelector = "modal_opened";
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -53,18 +52,18 @@ function getCardElement(data) {
 
 // Generic functions for opening and closing modals
 function openModal(modal) {
-  modal.classList.add("modal__open");
+  modal.classList.add(modalOpenedSelector);
   document.addEventListener("keydown", escapeHandler);
 }
 
 function closeModal(modal) {
-  modal.classList.remove("modal__open");
+  modal.classList.remove(modalOpenedSelector);
   document.removeEventListener("keydown", escapeHandler);
 }
 
 function escapeHandler(event) {
   if (event.key === "Escape") {
-    const openModal = document.querySelector(".modal__open");
+    const openModal = document.querySelector(modalOpenedSelector);
     if (openModal) {
       closeModal(openModal);
     }
@@ -80,13 +79,15 @@ function setModalListeners(modalElement) {
 }
 
 // Event listeners
+// editProfileToggler
 openButton.addEventListener("click", () => openModal(profileEditModal));
 closeButton.addEventListener("click", () => closeModal(profileEditModal));
+
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup ();
+  closeModal();
 });
 
 setModalListeners(profileEditModal);
