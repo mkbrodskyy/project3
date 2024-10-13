@@ -38,7 +38,7 @@ const cardsListEl = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
 
 
-const modalOpenedSelector = "modal_opened";
+const modalOpenedSelector = "modal_opened"
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -53,6 +53,8 @@ function getCardElement(data) {
 // Generic functions for opening and closing modals
 function openModal(modal) {
   modal.classList.add(modalOpenedSelector);
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
   document.addEventListener("keydown", escapeHandler);
 }
 
@@ -87,7 +89,7 @@ profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeModal();
+  closeModal(profileEditModal);
 });
 
 setModalListeners(profileEditModal);
@@ -97,4 +99,8 @@ console.log(initialCards);
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardsListEl.append(cardElement);
+});
+
+initialCards.forEach((cardData) => {
+  cardsWrap.prepend(getCardElement(cardData));
 });
