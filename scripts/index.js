@@ -1,5 +1,4 @@
-
-  // ---------------- Initial Cards Data ----------------
+// ---------------- Initial Cards Data ----------------
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -28,6 +27,8 @@ const initialCards = [
 ];
 
 // ---------------- DOM Element References ----------------
+const profileEditForm = document.forms["profile-form"];
+const addCardForm = document.forms["card-form"];
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
 const previewImageModal = document.querySelector("#preview-image-modal");
@@ -36,8 +37,6 @@ const addCloseButton = addCardModal.querySelector(".modal__close");
 const previewCloseButton = previewImageModal.querySelector(".modal__close");
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardForm = addCardModal.querySelector(".modal__form");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -82,6 +81,11 @@ function addCard(cardData) {
   cardsListEl.prepend(cardElement);
 }
 
+function renderCard(item, method = "prepend") {
+  const cardElement = createCard(item);
+  cardsListEl[method](cardElement);
+}
+
 const handleLikeIcon = (event) => {
   event.target.classList.toggle("card__like-button_solid");
 };
@@ -106,7 +110,7 @@ function escapeHandler(event) {
   }
 }
 
-function setModalListeners(modalElement) {
+function setOverlayListener(modalElement) {
   modalElement.addEventListener("click", (event) => {
     if (event.target === modalElement) {
       closeModal(modalElement);
@@ -128,7 +132,7 @@ function handleAddCardFormSubmit(evt) {
     name: cardTitleInput.value,
     link: cardUrlInput.value
   };
-  addCard(newCard);
+  renderCard(newCard, "prepend");
   closeModal(addCardModal);
   addCardForm.reset();
   disableSubmitButton(addCardForm); // Disable button after resetting the form
@@ -149,7 +153,6 @@ editButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", () => {
   addCardForm.reset();
-  disableSubmitButton(addCardForm); // Disable button when opening modal
   openModal(addCardModal);
 });
 
@@ -161,11 +164,25 @@ profileEditForm.addEventListener("submit", handleProfileFormSubmit);
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 // ---------------- Modal Overlay Click Handlers ----------------
-setModalListeners(profileEditModal);
-setModalListeners(addCardModal);
-setModalListeners(previewImageModal);
+setOverlayListener(profileEditModal);
+setOverlayListener(addCardModal);
+setOverlayListener(previewImageModal);
+
+// Combining overlay and close button listeners
+const popups = document.querySelectorAll('.modal');
+
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('modal_opened')) {
+      closeModal(popup);
+    }
+    if (evt.target.classList.contains('modal__close')) {
+      closeModal(popup);
+    }
+  });
+});
 
 // ---------------- Initialize Page ----------------
 initialCards.forEach((cardData) => {
-  addCard(cardData);
+  renderCard(cardData, "prepend");
 });
