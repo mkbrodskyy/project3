@@ -92,6 +92,8 @@
 }
 
 .modal__input {
+  width: 100%;
+  box-sizing: border-box;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
@@ -104,6 +106,8 @@
 }
 
 .modal__button {
+  width: 100%;
+  box-sizing: border-box;
   margin-top: auto;
   height: 50px;
   background-color: #000;
