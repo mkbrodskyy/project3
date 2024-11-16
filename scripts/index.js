@@ -30,7 +30,9 @@ const initialCards = [
 const profileEditForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
 const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileSaveButton = profileEditModal.querySelector(".modal__button")
 const addCardModal = document.querySelector("#add-card-modal");
+const addCardSaveButton = addCardModal.querySelector(".modal__button")
 const previewImageModal = document.querySelector("#preview-image-modal");
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -111,22 +113,20 @@ function escapeHandler(event) {
 }
 
 // ---------------- Form Handlers ----------------
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
+function handleProfileFormSubmit() {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
 }
 
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
+function handleAddCardFormSubmit() {
   const newCard = {
     name: cardTitleInput.value,
     link: cardUrlInput.value
   };
   renderCard(newCard);
   closeModal(addCardModal);
-  disableSubmitButton(addCardForm); // Disable button after resetting the form
+  disableSubmitButton(addCardForm);
 }
 
 function disableSubmitButton(formElement) {
@@ -144,6 +144,17 @@ editButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", () => {
   openModal(addCardModal);
+});
+
+// Save Button Event Listeners
+profileSaveButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleProfileFormSubmit();
+});
+
+addCardSaveButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleAddCardFormSubmit();
 });
 
 // Combining overlay and close button listeners
