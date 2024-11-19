@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.</title>
+    <!-- CSS Files -->
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
@@ -15,7 +16,6 @@
           class="header__logo"
         />
       </header>
-
       <main class="content">
         <section class="profile page__section">
           <img src="./images/avatar.jpg" alt="avatar" class="profile__image" />
@@ -36,17 +36,14 @@
             aria-label="Add card"
           ></button>
         </section>
-
         <section class="cards page__section">
           <ul class="cards__list"></ul>
         </section>
       </main>
-
       <footer class="footer page__section">
-        <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
+        <p class="footer__text">&copy; 2022 Around The U.S.</p>
       </footer>
     </div>
-
     <!-- Edit Profile Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
@@ -90,7 +87,6 @@
         </form>
       </div>
     </div>
-
     <!-- Add Card Modal -->
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
@@ -129,7 +125,6 @@
         </form>
       </div>
     </div>
-
     <!-- Preview Image Modal -->
     <div class="modal" id="preview-image-modal">
       <div class="modal__container modal__container_type_image">
@@ -142,7 +137,6 @@
         <p class="modal__caption"></p>
       </div>
     </div>
-
     <!-- Card Template -->
     <template id="card-template">
       <li class="card">
@@ -162,8 +156,7 @@
         </div>
       </li>
     </template>
-
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validation.js"></script>
+    <!-- Updated Script Tags -->
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
