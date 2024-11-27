@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidatorC.js';
+import FormValidator from '../components/FormValidator.js';
 
 // ---------------- Initial Cards Data ----------------
 const initialCards = [
@@ -68,7 +68,7 @@ function handleAddCardFormSubmit(event) {
   const cardElement = createCard(newCard);
   cardsListEl.prepend(cardElement);
   closeModal(addCardModal);
-  addCardFormValidator.resetValidation();
+  addCardFormValidator.disableButton();
   addCardForm.reset();
 }
 
@@ -115,6 +115,7 @@ function handleProfileFormSubmit(event) {
 editButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
+  formValidators['profile-form'].resetValidation();
   openModal(profileEditModal);
 });
 
@@ -143,11 +144,29 @@ const settings = {
   submitButtonSelector: '.modal__button',
   inactiveButtonClass: 'modal__button_inactive',
   inputErrorClass: 'modal__input_type_error',
-  errorClass: 'modal__error_visible'
+  errorClass: 'modal__error_visible',
+  formSelector: '.modal__form'
 };
 
-const profileFormValidator = new FormValidator(settings, profileEditForm);
-profileFormValidator.enableValidation();
+// Define an object for storing validators
+const formValidators = {
+}
 
-const addCardFormValidator = new FormValidator(settings, addCardForm);
-addCardFormValidator.enableValidation();
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    // Get the name of the form
+    const formName = formElement.getAttribute('name');
+
+    // Store the validator using the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+  console.log(config.formSelector);
+};
+
+enableValidation(settings);
+console.log(formValidators);
+
+formValidators['profile-form'].resetValidation();

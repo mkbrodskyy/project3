@@ -3,32 +3,37 @@ class Card {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._getTemplate();
+    this._setEventListeners();
   }
 
   _getTemplate() {
-    const cardElement = document
+    this._cardElement = document
       .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
 
-    return cardElement;
+    this._likeButton = this._cardElement.querySelector('.card__like-button');
+    this._cardImage = this._cardElement.querySelector('.card__image');
+    this._deleteButton = this._cardElement.querySelector('.card__delete-button');
+    this._title = this._cardElement.querySelector('.card__title');
   }
 
   _setEventListeners() {
-    this._cardElement.querySelector('.card__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleImageClick(this._data);
     });
-    this._cardElement.querySelector('.card__like-button').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeIcon();
     });
-    this._cardElement.querySelector('.card__delete-button').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._deleteCard();
     });
   }
 
   _handleLikeIcon() {
-    this._cardElement.querySelector('.card__like-button').classList.toggle('card__like-button_solid');
+    this._likeButton.classList.toggle('card__like-button_solid');
   }
 
   _deleteCard() {
@@ -37,13 +42,9 @@ class Card {
   }
 
   generateCard() {
-    this._cardElement = this._getTemplate();
-
-    this._cardElement.querySelector('.card__image').src = this._data.link;
-    this._cardElement.querySelector('.card__image').alt = this._data.name;
-    this._cardElement.querySelector('.card__title').textContent = this._data.name;
-
-    this._setEventListeners();
+    this._cardImage.src = this._data.link;
+    this._cardImage.alt = this._data.name;
+    this._title.textContent = this._data.name;
 
     return this._cardElement;
   }
