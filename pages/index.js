@@ -68,7 +68,7 @@ function handleAddCardFormSubmit(event) {
   const cardElement = createCard(newCard);
   cardsListEl.prepend(cardElement);
   closeModal(addCardModal);
-  addCardFormValidator.disableButton();
+  formValidators["card-form"].disableButton();
   addCardForm.reset();
 }
 

@@ -62,6 +62,10 @@ class FormValidator {
 
     this._toggleButtonState();
   }
+  disableButton () {
+  this._buttonElement.classList.add(this._settings.inactiveButtonClass);
+  this._buttonElement.disabled = true;
+  }
 }
 
 export default FormValidator;
