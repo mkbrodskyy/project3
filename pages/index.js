@@ -175,5 +175,3 @@ const enableValidation = (config) => {
 
 enableValidation(settings);
 console.log(formValidators);
-
-formValidators["profile-form"].resetValidation();
